@@ -19,7 +19,7 @@ stages:
         - task: PublishPipelineArtifact@1
           displayName: publish artifacts
           inputs:
-            targetPath: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
+            targetPath: '$(System.DefaultWorkingDirectory)/IAC/Terraform/'
             artifact: 'manifests'
             publishLocation: 'pipeline'
         - task: TerraformInstaller@0
@@ -30,7 +30,7 @@ stages:
           displayName: Terrafomrinit
           inputs:
             command: 'init'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/IAC/Terraform/'
             backendType: 'azurerm'
             backendServiceArm: 'terraform-connection'
             ensureBackend: true
@@ -44,7 +44,7 @@ stages:
           displayName: Terraformvalidate 
           inputs:
             command: 'validate'
-            workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/IAC/Terraform/'
             allowTelemetryCollection: true
 
 
