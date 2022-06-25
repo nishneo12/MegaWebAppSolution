@@ -41,7 +41,7 @@ stages:
             backendAzureRmKey: 'terrform-base.tfstate'
             allowTelemetryCollection: false
         - task: TerraformCLI@0
-          displayName: Terraform-validate
+          displayName: Terraform-validate 
           inputs:
             command: 'validate'
             workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
