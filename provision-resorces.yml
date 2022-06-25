@@ -1,0 +1,51 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Terraform Validate
+    jobs:
+     - job: TerraformValidateJob
+       continueOnError: false
+       steps:
+        - task: PublishPipelineArtifact@1
+          displayName: publish artifacts
+          inputs:
+            targetPath: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
+            artifact: 'manifests'
+            publishLocation: 'pipeline'
+        - task: TerraformInstaller@0
+          displayName: Terraform install
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformCLI@0
+          displayName: Terrafomr init
+          inputs:
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
+            backendType: 'azurerm'
+            backendServiceArm: 'terraform-connection'
+            ensureBackend: true
+            backendAzureRmResourceGroupName: 'rg-terraform-backend-group'
+            backendAzureRmResourceGroupLocation: 'centralus'
+            backendAzureRmStorageAccountName: 'terraformbackendStorage'
+            backendAzureRmContainerName: 'terrafomrbackend'
+            backendAzureRmKey: 'terrform-base.tfstate'
+            allowTelemetryCollection: false
+        - task: TerraformCLI@0
+          displayName: Terraform validate
+          inputs:
+            command: 'validate'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
+            allowTelemetryCollection: true
+
+
+
