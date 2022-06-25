@@ -27,7 +27,7 @@ stages:
           inputs:
             terraformVersion: 'latest'
         - task: TerraformCLI@0
-          displayName: Terrafomr init
+          displayName: Terrafomr-init
           inputs:
             command: 'init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
@@ -41,7 +41,7 @@ stages:
             backendAzureRmKey: 'terrform-base.tfstate'
             allowTelemetryCollection: false
         - task: TerraformCLI@0
-          displayName: Terraform validate
+          displayName: Terraform-validate
           inputs:
             command: 'validate'
             workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
