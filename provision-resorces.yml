@@ -11,7 +11,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-  - stage: Terraform-Validate
+  - stage: TerraformValidate
     jobs:
      - job: TerraformValidateJob
        continueOnError: false
@@ -23,11 +23,11 @@ stages:
             artifact: 'manifests'
             publishLocation: 'pipeline'
         - task: TerraformInstaller@0
-          displayName: Terraform install
+          displayName: Terraforminstall
           inputs:
             terraformVersion: 'latest'
         - task: TerraformCLI@0
-          displayName: Terrafomr-init
+          displayName: Terrafomrinit
           inputs:
             command: 'init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
@@ -41,7 +41,7 @@ stages:
             backendAzureRmKey: 'terrform-base.tfstate'
             allowTelemetryCollection: false
         - task: TerraformCLI@0
-          displayName: Terraform-validate 
+          displayName: Terraformvalidate 
           inputs:
             command: 'validate'
             workingDirectory: '$(System.DefaultWorkingDirectory)/MegaWebAppSolution/IAC/Terraform/'
