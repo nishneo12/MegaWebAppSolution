@@ -36,7 +36,7 @@ stages:
             ensureBackend: true
             backendAzureRmResourceGroupName: 'rg-terraform-backend-group'
             backendAzureRmResourceGroupLocation: 'centralus'
-            backendAzureRmStorageAccountName: 'terraformbackendstorage'
+            backendAzureRmStorageAccountName: 'terraformbackendstoragemine'
             backendAzureRmContainerName: 'terrafomrbackend'
             backendAzureRmKey: 'terrform-base.tfstate'
             allowTelemetryCollection: false
